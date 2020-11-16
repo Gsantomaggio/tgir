@@ -1,0 +1,17 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq-one
+spec:
+  replicas: 1
+  tls:
+    secretName:  tls-cluster-one-secret
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq-two
+spec:
+  replicas: 1
+  tls:
+    secretName:  tls-cluster-two-secret

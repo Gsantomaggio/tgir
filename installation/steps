@@ -1,0 +1,13 @@
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="server --no-deploy traefik"  sh -s -
+
+
+helm repo add traefik https://helm.traefik.io/traefik
+helm install traefik traefik/traefik -f values.yaml
+kubectl create secret tls tls-cluster-one-secret --cert=/Users/gas/git/michaelklishin/tls-gen/basic/result/server_certificate.pem --key=/Users/gas/git/michaelklishin/tls-gen/basic/result/server_key.pem
+kubectl create secret tls tls-cluster-two-secret --cert=/Users/gas/git/michaelklishin/tls-gen/basic/result/server_certificate.pem --key=/Users/gas/git/michaelklishin/tls-gen/basic/result/server_key.pem
+kubectl apply -f "https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml"
+kubectl apply -f "rabbitmq.yaml"
+kubectl apply -f "tcp-ingress.yml"
+
+
+

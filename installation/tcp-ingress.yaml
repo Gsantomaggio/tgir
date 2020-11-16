@@ -1,0 +1,28 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: rabbitmq-one-ingress 
+spec:
+  routes:                       
+  - match: HostSNI(`rabbit.one`)
+    services:                   
+    - name: rabbitmq-one
+      port: 5671                
+  tls:               
+     passthrough: true 
+     secretName: tls-one-secret      
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: rabbitmq-two-ingress 
+spec:
+  routes:                       
+  - match: HostSNI(`rabbit.two`)
+    services:                   
+    - name: rabbitmq-two 
+      port: 5671                
+  tls:               
+     passthrough: true 
+     secretName: tls-two-secret      
+
